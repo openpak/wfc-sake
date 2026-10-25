@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenPak WFC sake
+After=openpak-postgres.service
+
+[Container]
+ContainerName=openpak-wfc-sake
+Image=ghcr.io/openpak/wfc-sake:latest
+Network=openpak.network
+EnvironmentFile=%h/openpak/deploy/wfc-full/wfc-sake.env
+Volume=%h/openpak/deploy/wfc-split/token.key:/keys/wfc-token.key:ro,U
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
