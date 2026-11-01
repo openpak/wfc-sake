@@ -31,6 +31,8 @@ Test commands, ports, environment variables and release detail are in
 
 ## Docs
 
+- [Mario Kart Wii](docs/mario-kart-wii.md)
+- [Changelog](CHANGELOG.md)
 - [Protocol](docs/protocol.md)
 - [Evidence](docs/evidence.md)
 - [Deploy](docs/deploy.md)

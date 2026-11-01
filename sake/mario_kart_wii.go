@@ -7,10 +7,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"openpak/wfc-common/common"
 	"openpak/wfc-common/database"
 	"openpak/wfc-common/logging"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -218,6 +220,7 @@ func handleMarioKartWiiGhostDownloadRequest(responseWriter http.ResponseWriter, 
 	pidString := query.Get("p0")
 	courseIdString := query.Get("c0")
 	timeString := query.Get("t0")
+	logUnknownQueryKeys(moduleName, query, "region", "p0", "c0", "t0")
 
 	regionIdInt, err := strconv.Atoi(regionIdString)
 	if err != nil {
@@ -294,6 +297,7 @@ func handleMarioKartWiiGhostUploadRequest(moduleName string, responseWriter http
 	pidString := query.Get("pid")
 	playerInfo := query.Get("playerinfo")
 	_, isContest := query["contest"]
+	logUnknownQueryKeys(moduleName, query, "regionid", "courseid", "score", "pid", "playerinfo", "contest")
 
 	regionIdInt, err := strconv.Atoi(regionIdString)
 	if err != nil {
@@ -406,6 +410,17 @@ func handleMarioKartWiiGhostUploadRequest(moduleName string, responseWriter http
 	}
 
 	responseWriter.Header().Set(SakeFileResultHeader, strconv.Itoa(SakeFileResultSuccess))
+}
+
+// logUnknownQueryKeys records query parameters the documented ghost requests do not carry, with
+// their names only (values may identify a player), so a console capture can show whether the
+// game asks for more (a ghost by rank or friend, a competition) than the server answers.
+func logUnknownQueryKeys(moduleName string, query url.Values, known ...string) {
+	for key := range query {
+		if !slices.Contains(known, key) {
+			logging.Info(moduleName, "Unknown query parameter:", aurora.Cyan(key), "length:", len(query.Get(key)))
+		}
+	}
 }
 
 func downloadedGhostFileHeader() []byte {

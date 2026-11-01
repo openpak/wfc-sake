@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"openpak/wfc-common/common"
 	"openpak/wfc-common/database"
+	"openpak/wfc-common/logging"
 )
 
 var (
@@ -18,6 +19,10 @@ func StartServer(reload bool) {
 
 	// Start SQL
 	db = database.Start(config)
+	// Every accepted Mario Kart Wii ghost upload is also archived with its header metadata.
+	if err := db.EnsureMarioKartWiiGhostArchive(); err != nil {
+		logging.Error("SAKE", "ghost archive schema:", err)
+	}
 }
 
 func Shutdown() {
