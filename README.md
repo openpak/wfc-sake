@@ -35,7 +35,7 @@ Test commands, ports, environment variables and release detail are in
 - [Changelog](CHANGELOG.md)
 - [Protocol](docs/protocol.md)
 - [Deploy](docs/deploy.md)
-- [Notes](docs/notes.md)
+- [Provenance](docs/provenance.md)
 
 ## Licence
 
