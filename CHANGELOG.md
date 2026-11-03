@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1 - 2026-11-03
+
+- Every HTTP request now logs one line to stderr, `http <method> <path> -> <status> <ms>ms` (path only, never the query, headers or bodies; `/healthz` skipped), through wfc-common v0.3.0 `httplog`.
+
 ## v0.2.0
 
 - Requires wfc-common v0.2.0: every accepted Mario Kart Wii ghost upload is also archived with its
