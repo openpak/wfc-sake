@@ -25,6 +25,7 @@ func main() {
 	defer stop()
 	sake.StartServer(false)
 	defer sake.Shutdown()
+	sake.StartBoard(ctx, cfg)
 	mux := http.NewServeMux()
 	sake.RegisterHandlers(mux)
 	h := http.NewServeMux()

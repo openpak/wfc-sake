@@ -409,6 +409,9 @@ func handleMarioKartWiiGhostUploadRequest(moduleName string, responseWriter http
 		return
 	}
 
+	// The ghost table above is the game's file store; the ranking lives in the leaderboards core.
+	submitTime(request.Context(), regionId, courseId, score, pid, playerInfo)
+
 	responseWriter.Header().Set(SakeFileResultHeader, strconv.Itoa(SakeFileResultSuccess))
 }
 

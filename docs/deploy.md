@@ -8,7 +8,9 @@ service container. Restarting another protocol does not restart these sockets.
 
 Use example.env with the existing WFC database and shared WFC_TOKEN_KEY_FILE.
 Never rotate token material or change profile IDs during ordinary service releases.
-Dependencies: no remote WFC service dependency.
+Dependencies: no remote WFC service dependency. Mario Kart Wii times also go to the leaderboards core
+(`WFC_LEADERBOARDS_ADDR`, `WFC_LEADERBOARDS_KEY`) for the account behind the console
+(`WFC_CORE_ADDRESS`, `WFC_CORE_KEY`); see [wfc-common docs/leaderboards.md](https://github.com/openpak/wfc-common/blob/main/docs/leaderboards.md).
 
 ```sh
 GOWORK=off go test -mod=vendor ./...

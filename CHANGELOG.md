@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.3.0 - 2026-11-04
+
+- Mario Kart Wii times go to the neutral leaderboards core (wfc-common v0.4.0 `mkwboard`): each accepted ghost upload is also submitted as a time on the course board (worldwide and the player's region) for the account linked to the console. Needs `WFC_LEADERBOARDS_ADDR`/`_KEY` and `WFC_CORE_ADDRESS`/`_KEY`; unset leaves the service as before.
+- At start and every ten minutes the times in `mario_kart_wii_sake` that the core lacks are imported for linked consoles (idempotent, the table is never changed). `mario_kart_wii_sake` stays the ghost-file store.
+
 ## v0.2.2 - 2026-11-03
 
 - Internal `/internal/` polls are counted and summarised once a minute instead of logged per call (wfc-common v0.3.1).
