@@ -42,7 +42,7 @@ func StartBoard(ctx context.Context, cfg common.Config) {
 		logging.Error("SAKE", "account core dial:", err)
 		return
 	}
-	b := &mkwboard.Board{LB: lb, Links: links, CourseName: courseName}
+	b := &mkwboard.Board{LB: lb, Links: mkwboard.CachedLinker{DB: &db, Core: links}, CourseName: courseName}
 	board.Store(b)
 	go func() {
 		declared := false

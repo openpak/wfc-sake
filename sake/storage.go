@@ -1,6 +1,7 @@
 package sake
 
 import (
+	"context"
 	"encoding/xml"
 	"io"
 	"net/http"
@@ -253,6 +254,12 @@ func getRequestIdentity(moduleName string, request StorageRequestCommon) (uint32
 	loginTicket := common.GPCMLoginTicket{}
 	if err := loginTicket.Unmarshal(request.LoginTicket); err != nil {
 		logging.Error(moduleName, err)
+		return 0, common.GameInfo{}, ResultLoginTicketInvalid
+	}
+
+	// Link-first: an unlinked console's profile has no storage.
+	if !db.LinkedProfile(context.Background(), loginTicket.ProfileID) {
+		refusedUnlinked.Add(1)
 		return 0, common.GameInfo{}, ResultLoginTicketInvalid
 	}
 

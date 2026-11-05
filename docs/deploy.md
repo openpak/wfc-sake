@@ -23,3 +23,5 @@ from wfc-common. The image and tests build from this repository alone. Refresh
 vendor with the sibling library available after shared contract changes.
 See [the full split guide](https://github.com/openpak/wfc-common/blob/main/docs/service-split.md) for full topology, failure/recovery behavior and
 migration.
+
+Link-first (prds#139): `WFC_LINK_FIRST=1` refuses unlinked consoles here as well (defence in depth; wfc-gpcm is the gate).

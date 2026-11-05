@@ -338,6 +338,12 @@ func handleMarioKartWiiGhostUploadRequest(moduleName string, responseWriter http
 		responseWriter.Header().Set(SakeFileResultHeader, strconv.Itoa(SakeFileResultMissingParameter))
 		return
 	}
+	// Link-first: an unlinked console uploads no ghost.
+	if !db.LinkedProfile(request.Context(), uint32(pid)) {
+		refusedUnlinked.Add(1)
+		responseWriter.Header().Set(SakeFileResultHeader, strconv.Itoa(SakeFileResultMissingParameter))
+		return
+	}
 
 	fixedPlayerInfo, ok := isPlayerInfoValid(playerInfo)
 	if !ok {

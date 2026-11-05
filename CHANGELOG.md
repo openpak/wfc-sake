@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0 - 2026-11-05
+
+- Link-first (prds#139), behind `WFC_LINK_FIRST=1`: storage requests and Mario Kart Wii ghost uploads of an unlinked console are refused (`LoginTicketInvalid`, missing-parameter result). The leaderboards adapter reads the account from the local link cache first. Vendors wfc-common v0.8.0.
+
 ## v0.3.0 - 2026-11-04
 
 - Mario Kart Wii times go to the neutral leaderboards core (wfc-common v0.4.0 `mkwboard`): each accepted ghost upload is also submitted as a time on the course board (worldwide and the player's region) for the account linked to the console. Needs `WFC_LEADERBOARDS_ADDR`/`_KEY` and `WFC_CORE_ADDRESS`/`_KEY`; unset leaves the service as before.
